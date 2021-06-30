@@ -1,0 +1,23 @@
+{% extends 'phones/base.html' %}
+{% block page_header_title %}
+    contact list
+{% endblock %}
+{% block content %}
+    <div class="container-login100" style="background-color: #7abaff">
+
+        <form method="post">{% csrf_token %}
+
+            <div class="form-group" style="color: white">
+
+
+                <label class="mb-2" style="color: white" >Name: {{ form.name }}</label>
+                <label class="mt-2" style="color: white" >LastName: {{ form.last_name }}</label>
+                <label class="mt-2" style="color: white" >PhoneNumber: {{ form.phone_number }}</label>
+
+
+                <input type="submit" class="btn mt-2 btn-primary" value="Update">
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

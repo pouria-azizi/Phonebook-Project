@@ -1,0 +1,80 @@
+{% extends 'phones/base.html' %}
+
+{% block page_header_title %}
+    Search
+{% endblock %}
+
+{% block content %}
+    <div class="limiter">
+        <div class="container-login100" style="background-color: #7abaff">
+            <div class="col-md-3">
+
+                <div class="panel-heading">
+                    <div class="panel-title" style="color: white">Search in Phonebook</div>
+                </div>
+                <div style="padding-top:30px" class="panel-body">
+
+                    <form>
+                        <label for="query" style="color: white" class="mb-3">Enter phone number:</label>
+                        <input type="text" id="query">
+
+                    </form>
+                    <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <button id="search-btn" style="color: white" class="mt-2 mb-5">Search 🔎</button>
+                            <div id="output-div"></div>
+                        </div>
+                        <select class="custom-select" id="SearchType2">
+                            <option selected>Choose...</option>
+                            <option value="Contain">Contain</option>
+                            <option value="Exact">Exact</option>
+                            <option value="StartWith">StartWith</option>
+                            <option value="EndWith">EndWith</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block page_scripts %}
+
+    <script>
+        $(document).ready(function () {
+            $('#search-btn').click(function () {
+                const query_text = $('#query').val();
+                const type_l = $('#SearchType2').val();
+                if (phone_validate(query_text)) {
+                    const ajax_config = {
+                        url: '/phones/find/',
+                        data: {
+                            phonenum: query_text,
+                            value: type_l,
+                        },
+                        method: 'get',
+                        success: function (response) {
+                            alert(response.count);
+                            const my_output_div = $('#output-div');
+                            const theader = '<tr><th>FirstName</th><th>LastName</th><th>PhoneNumber</th></tr>';
+                            my_output_div.append(theader);
+                            $(response.results).each(function (index, obj) {
+                                const my_table = '<tr><td>'+obj.name+'</td><td>'+obj.last_name+'</td><td>'+obj.phone_number+'</td></tr>';
+                                my_output_div.append(my_table);
+                            });
+                        }
+                    };
+                    $.ajax(ajax_config);
+                }
+            });
+        });
+
+        function phone_validate(phno) {
+            var regexPattern = RegExp(/^[0-9-+]+$/);
+            return regexPattern.test(phno)
+        }
+    </script>
+
+
+{% endblock %}

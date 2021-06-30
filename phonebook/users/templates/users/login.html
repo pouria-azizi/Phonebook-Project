@@ -1,0 +1,39 @@
+{% extends 'phones/base.html' %}
+{% block page_header_title %}
+    Login
+{% endblock %}
+
+{% block content %}
+
+    <div class="limiter">
+        <div class="container-login100" style="background-color: #0f6674">
+            <div class="col-md-3">
+
+                <div class="panel-heading">
+                    <div class="panel-title" style="color: white">Please login 🔓</div>
+                </div>
+                <div style="padding-top:30px" class="panel-body">
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label for="username" style="color: white">Username</label>
+                            <input id="username" name="username" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" style="color: white">Password</label>
+                            <input type="password" id="password" name="password" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Login</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
