@@ -10,5 +10,5 @@ urlpatterns = [
     path("contacts/", views.ContactList.as_view(), name="contacts"),
     # path("edit-contacts/", views.EditContact.as_view(), name="edit-contacts"),
     path('update/<int:pk>', views.EditContact.as_view(), name="edit-contacts"),
-    # path('activities/', views.SessionView.as_view(), name="recent-activities")
+    path('activities/', views.SessionView.as_view(), name="recent-activities")
 ]

@@ -20,6 +20,7 @@ def login_view(request):
     user = None
     form_instance = forms.LoginForm()
     if request.method == 'POST':
+        request.session['user login'] = 'user login'
         form_instance = forms.LoginForm(data=request.POST, files=request.FILES)
         if form_instance.is_valid():
             username = form_instance.cleaned_data['username']

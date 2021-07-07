@@ -1,0 +1,21 @@
+{% extends 'phones/base.html' %}
+{% block content %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>activities</th>
+            <th>detail</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key, value in session.items %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

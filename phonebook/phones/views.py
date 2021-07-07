@@ -27,12 +27,15 @@ class CreateEntry(LoginRequiredMixin, CreateView):
 
     def post(self, request, *args, **kwargs):
 
-        self.request.session['action'] = {}
         form_instance = forms.EntryForm(data=self.request.POST)
-        self.request.session['phone_number'] = models.Entry.phone_number
+        request.session['phone_number'] = models.Entry.phone_number
         if form_instance.is_valid():
             form_instance.save(commit=False).user = self.request.user
             entry_object = form_instance.save()
+            request.session['create entry'] = 'create entry'
+            request.session.modified = True
+            # print(dict(request.session))
+
             return JsonResponse(data={
                 'success': True,
                 'pk': entry_object.pk,
@@ -41,6 +44,8 @@ class CreateEntry(LoginRequiredMixin, CreateView):
                 'phone_number': entry_object.phone_number,
             }, status=201)
         else:
+            request.session['error create entry'] = 'error create entry'
+            request.session.modified = True
             return JsonResponse(data={
                 'success': False,
             }, status=400)
@@ -100,10 +105,10 @@ class FindEntry(generic.View):
 
     def get(self, request, *args, **kwargs):
 
-        # self.request.session['action'] = {}
         phone_number = self.request.GET.get('phonenum', None)
         value = self.request.GET.get('value', None)
-
+        request.session['search'] = 'search'
+        request.session.modified = True
         if not phone_number:
             return JsonResponse({'success': False, 'error': 'No number specified.'}, status=400)
 
@@ -139,7 +144,8 @@ class ContactList(ListView):
     template_name = 'phones/entry_list.html'
 
     def get_queryset(self):
-        # self.request.session['action'] = {}
+        self.request.session['show list'] = 'show list'
+        self.request.session.modified = True
         return Entry.objects.filter(user=self.request.user)
 
 
@@ -157,24 +163,45 @@ class EditContact(LoginRequiredMixin, UpdateView):
     template_name = 'phones/Entry_update_form.html'
     success_url = reverse_lazy('phones:contacts')
 
+    # def post(self, request, *args, **kwargs):
+    #
+    #     form_instance = forms.EntryForm(data=self.request.POST)
+    #     self.request.session['phone_number'] = models.Entry.phone_number
+    #     if form_instance.is_valid():
+    #         form_instance.save(commit=False).user = self.request.user
+    #         entry_object = form_instance.save()
+    #         request.session['create entry'] = 'create entry'
+    #
+    #         return JsonResponse(data={
+    #             'success': True,
+    #             'pk': entry_object.pk,
+    #             'name': entry_object.name,
+    #             'last_name': entry_object.last_name,
+    #             'phone_number': entry_object.phone_number,
+    #         }, status=201)
+    #     else:
+    #         request.session['error create entry'] = 'error create entry'
+    #         return JsonResponse(data={
+    #             'success': False,
+    #         }, status=400)
+
     # def __getattr__(self, item):
     #     self.request.session['action'] = {}
 
 
-# class SessionView(DetailView):
-#     model = Entry
-#     template_name = 'phones/phone_activate.html'
-#
-#     def get_context_data(self, **kwargs):
-#         # Call the base implementation first to get a context
-#         context = super().get_context_data(**kwargs)
-#         if 'action' not in self.request.session or not self.request.session['action']:
-#             self.request.session['action'] = [self.object.pk]
-#         else:
-#             recentList = self.request.session['action']
-#             recentList.append(self.object.pk)
-#             self.request.session['recent'] = recentList
-#         # Add in a QuerySet of featured products
-#         context['product_list'] = Entry.objects.filter(featured=True).exclude(pk=self.object.pk)
-#         context['recent_list'] = Entry.objects.filter(pk__in=recentList)
-#         return context
+class SessionView(View):
+    template_name = 'phones/phone_activate.html'
+
+    def get(self, request, *args, **kwargs):
+        i = 0
+        s = dict(request.session)
+        # for key, value in dict(request.session).items():
+        #     print(key, value)
+        #     if i > 2:
+        #         s[key] = value
+        #         i += 1
+        context = {
+            'session': s
+        }
+        print(s)
+        return render(request, self.template_name, context=context)
