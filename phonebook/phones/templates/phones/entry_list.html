@@ -6,45 +6,53 @@
 {% block content %}
     <div class="container-login100" style="background-color: #7abaff">
         <div class="container">
-{#            {% cache 3600 1 %}#}
-                <table class="table table-striped" style="background-color: white">
-                    <thead>
+            {#            {% cache 3600 1 %}#}
+
+            <table class="table table-striped" style="background-color: white">
+                <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>نام خانوادگی</th>
+                    <th>شماره</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>چاپ</th>
+                </tr>
+                </thead>
+                {% for contact in object_list %}
+                    <tbody>
+
                     <tr>
-                        <th>نام</th>
-                        <th>نام خانوادگی</th>
-                        <th>شماره</th>
-                        <th>تاریخ ایجاد</th>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.last_name }}</td>
+                        <td>
+                            <form id="forms" method="post">
+                                {% csrf_token %}
+                                <div class="container">
+                                    <label>
+                                        <input class="input-phone" type="text" maxlength="11"
+                                               value="{{ contact.phone_number }}">
+                                        <a class="btn btn-primary ml-5"
+                                           href="{% url 'phones:edit-contacts' pk=contact.pk %}">Edit</a>
+                                        <button class="submit btn btn-danger">Delete</button>
+                                    </label>
+                                </div>
+                            </form>
+                        </td>
+                        <td>{{ contact.created_at }}</td>
+                        <td><a href="{% url 'phones:print-list' phone.pk %}" class="btn btn-primary mt-2">
+                            🖨
+                        </a></td>
                     </tr>
-                    </thead>
-                    {% for contact in object_list %}
-                        <tbody>
 
-                        <tr>
-                            <td>{{ contact.name }}</td>
-                            <td>{{ contact.last_name }}</td>
-                            <td>
-                                <form id="forms" method="post">
-                                    {% csrf_token %}
-                                    <div class="container">
-                                        <label>
-                                            <input class="input-phone" type="text" maxlength="11" value="{{ contact.phone_number }}">
-                                            <a class="btn btn-primary ml-5" href="{% url 'phones:edit-contacts' pk=contact.pk%}">Edit</a>
-                                            <button class="submit btn btn-danger">Delete</button>
-                                        </label>
-                                    </div>
-                                </form>
-                            </td>
-                            <td>{{ contact.created_at }}</td>
-                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
 
-                        </tbody>
-                    {% endfor %}
-                </table>
-{#            {% endcache %}#}
+            {#            {% endcache %}#}
 
-                {% block pagination %}
-                    {% if is_paginated %}
-                        <div class="pagination" style="color: #7abaff">
+            {% block pagination %}
+                {% if is_paginated %}
+                    <div class="pagination" style="color: #7abaff">
             <span class="page-links">
                 {% if page_obj.has_previous %}
                     <a style="color: white"
@@ -57,9 +65,9 @@
                     <a style="color: white" href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
-                        </div>
-                    {% endif %}
-                {% endblock %}
+                    </div>
+                {% endif %}
+            {% endblock %}
         </div>
     </div>
 
