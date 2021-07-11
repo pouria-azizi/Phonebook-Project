@@ -110,10 +110,6 @@ class ContactList(ListView):
         return Entry.objects.filter(user=self.request.user)
 
 
-class ViewContact(DetailView):
-    model = models.Entry
-
-
 class EditContact(LoginRequiredMixin, UpdateView):
     model = models.Entry
     form = forms.EntryForm
