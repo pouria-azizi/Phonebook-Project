@@ -1,5 +1,7 @@
+{% load i18n %}
 {% load static %}
-<html>
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html dir="{% if LANGUAGE_BIDI == 'rtl' %}rtl{% else %}ltr{% endif %}">
 <head>
     <title>
         PhoneBook:

@@ -1,5 +1,7 @@
 {% extends 'phones/base.html' %}
 {#{% load cache %}#}
+{% load i18n %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% block page_header_title %}
     contact list
 {% endblock %}
@@ -8,14 +10,14 @@
         <div class="container">
             {#            {% cache 3600 1 %}#}
 
-            <table class="table table-striped" style="background-color: white">
+            <table class="table table-striped" style="background-color: white" dir="{% if LANGUAGE_BIDI == 'rtl' %}rtl{% else %}ltr{% endif %}">
                 <thead>
                 <tr>
-                    <th>نام</th>
-                    <th>نام خانوادگی</th>
-                    <th>شماره</th>
-                    <th>تاریخ ایجاد</th>
-                    <th>چاپ</th>
+                    <th>{% trans 'نام' %}</th>
+                    <th>{% trans 'نام خانوادگی' %}</th>
+                    <th>{% trans 'شماره' %}</th>
+                    <th>{% trans 'تاریخ ایجاد' %}</th>
+                    <th>{% trans 'چاپ' %}</th>
                 </tr>
                 </thead>
                 {% for contact in object_list %}
