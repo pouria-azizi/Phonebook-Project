@@ -18,7 +18,7 @@
 
         <a class="navbar-brand" href={% url 'phones:search' %}>{% trans 'Search' %}</a>
 
-        <a class="navbar-brand" href={% url 'phones:contacts' %}>{% trans 'Contact' %}</a>
+        <a class="navbar-brand" href={% url 'phones:contacts' %}>{% trans 'Contacts' %}</a>
 
         <a class="navbar-brand" href="{% url 'phones:recent-activities' %}">Activities</a>
     {% endif %}
@@ -39,15 +39,15 @@
     <h1 class="mt-5 mb-4">New Contact:</h1>
     <form>
         <div class="form-group">
-            <label for="title" style="color: white">first name</label>
+            <label for="title" style="color: white">{% trans 'نام' %}</label>
             {{ form.name|add_class:'form-control' }}
         </div>
         <div class="form-group">
-            <label for="title" style="color: white">last name</label>
+            <label for="title" style="color: white">{% trans 'نام خانوادگی' %}</label>
             {{ form.last_name|add_class:'form-control' }}
         </div>
         <div class="form-group">
-            <label for="title" style="color: white">phone number</label>
+            <label for="title" style="color: white">{% trans 'شماره' %}</label>
             {{ form.phone_number|add_class:'form-control' }}
         </div>
         {#    {{ form.as_table}}#}

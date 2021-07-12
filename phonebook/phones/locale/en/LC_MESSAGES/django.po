@@ -56,3 +56,7 @@ msgstr "Contacts"
 #: phones/templates/phones/base.html:21
 msgid "فعالیت ها"
 msgstr "Activities"
+
+#: phones/templates/phones/base.html:22
+msgid "فهرست مخاطب ها"
+msgstr "Contacts list"

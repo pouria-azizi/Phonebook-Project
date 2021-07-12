@@ -14,9 +14,9 @@
             <div class="form-group" style="color: white" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 
 
-                <label class="mb-2" style="color: white" >{% trans 'نام' %}: {{ form.name|add_class:'form-control' }}</label>
-                <label class="mt-2" style="color: white" >{% trans 'نام خانوادگی' %}: {{ form.last_name|add_class:'form-control' }}</label>
-                <label class="mt-2" style="color: white" >{% trans 'شماره' %}: {{ form.phone_number|add_class:'form-control' }}</label>
+                <label class="mb-2" style="color: white" >{% trans 'نام' %} {{ form.name|add_class:'form-control' }}</label>
+                <label class="mt-2" style="color: white" >{% trans 'نام خانوادگی' %} {{ form.last_name|add_class:'form-control' }}</label>
+                <label class="mt-2" style="color: white" >{% trans 'شماره' %} {{ form.phone_number|add_class:'form-control' }}</label>
 
 
                 <input type="submit" class="btn mt-2 btn-primary" value="Update">
