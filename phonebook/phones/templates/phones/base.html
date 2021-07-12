@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load static %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
-<html dir="{% if LANGUAGE_BIDI == 'rtl' %}rtl{% else %}ltr{% endif %}">
+<html {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <title>
         PhoneBook:
@@ -27,18 +27,18 @@
     {% if user.is_authenticated %}
         <a class="navbar-brand" href={% url 'phones:show-add-entry-form' %}>Create Contact</a>
 
-        <a class="navbar-brand" href={% url 'phones:search' %}>Search</a>
+        <a class="navbar-brand" href={% url 'phones:search' %}>{% trans 'Search' %}</a>
 
-        <a class="navbar-brand" href={% url 'phones:contacts' %}>My Contact</a>
+        <a class="navbar-brand" href={% url 'phones:contacts' %}>{%trans 'Contacts' %}</a>
 
-        <a class="navbar-brand" href="{% url 'phones:recent-activities' %}">Activities</a>
+        <a class="navbar-brand" href="{% url 'phones:recent-activities' %}">{% trans 'Activities' %}</a>
     {% endif %}
     <ul class="navbar-nav ml-auto">
         {% if not user.is_authenticated %}
-            <a class="navbar-brand" href={% url 'users:login' %}>Login</a>
+            <a class="navbar-brand" href={% url 'users:login' %}>{% trans 'Login' %}</a>
         {% endif %}
         {% if user.is_authenticated %}
-            <a class="navbar-brand" style="color: #c80000" href="{% url 'users:logout' %}">Logout</a>
+            <a class="navbar-brand" style="color: #c80000" href="{% url 'users:logout' %}">{% trans 'Logout' %}</a>
         {% endif %}
         {% if user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'users:edit-profile' %}">{{ user.username }}</a>

@@ -1,7 +1,8 @@
 {% load static %}
 {% load widget_tweaks %}
-
-<html>
+{% load i18n %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <title>دفترچه تلفن</title>
     <script src="{% static 'js/jquery-3.6.0.js' %}"></script>
@@ -15,9 +16,9 @@
 
         <a class="navbar-brand" href={% url 'phones:show-add-entry-form' %}>Create Contact</a>
 
-        <a class="navbar-brand" href={% url 'phones:search' %}>Search</a>
+        <a class="navbar-brand" href={% url 'phones:search' %}>{% trans 'Search' %}</a>
 
-        <a class="navbar-brand" href={% url 'phones:contacts' %}>My Contact</a>
+        <a class="navbar-brand" href={% url 'phones:contacts' %}>{% trans 'Contact' %}</a>
 
         <a class="navbar-brand" href="{% url 'phones:recent-activities' %}">Activities</a>
     {% endif %}

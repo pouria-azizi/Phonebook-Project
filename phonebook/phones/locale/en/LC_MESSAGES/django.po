@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-11 22:52+0430\n"
-"PO-Revision-Date: 2021-07-11 22:55+0430\n"
+"PO-Revision-Date: 2021-07-12 12:38+0430\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -48,3 +48,11 @@ msgstr "Created at"
 #: phones/templates/phones/entry_list.html:19
 msgid "چاپ"
 msgstr "Print"
+
+#: phones/templates/phones/base.html:20
+msgid "مخاطب ها"
+msgstr "Contacts"
+
+#: phones/templates/phones/base.html:21
+msgid "فعالیت ها"
+msgstr "Activities"

@@ -1,16 +1,17 @@
 {% extends 'phones/base.html' %}
 {#{% load cache %}#}
 {% load i18n %}
-{% get_current_language_bidi as LANGUAGE_BIDI %}
+{#{% get_current_language_bidi as LANGUAGE_BIDI %}#}
+{#{{ LANGUAGE_CODE|language_bidi }}#}
 {% block page_header_title %}
     contact list
 {% endblock %}
 {% block content %}
-    <div class="container-login100" style="background-color: #7abaff">
+    <div class="container-login100" style="background-color: #7abaff" >
         <div class="container">
             {#            {% cache 3600 1 %}#}
 
-            <table class="table table-striped" style="background-color: white" dir="{% if LANGUAGE_BIDI == 'rtl' %}rtl{% else %}ltr{% endif %}">
+            <table class="table table-striped" style="background-color: white">
                 <thead>
                 <tr>
                     <th>{% trans 'نام' %}</th>
