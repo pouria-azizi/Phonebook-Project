@@ -1,0 +1,32 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>phone numbers</title>
+</head>
+<body>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>{% trans 'نام' %}</th>
+        <th>{% trans 'نام خانوادگی' %}</th>
+        <th>{% trans 'شماره' %}</th>
+        <th>{% trans 'تاریخ ایجاد' %}</th>
+    </tr>
+    </thead>
+    {% for contact in object %}
+        <tbody>
+
+        <tr>
+            <td>{{ object.name }}</td>
+            <td>{{ object.last_name }}</td>
+            <td>{{ object.phone_number }}</td>
+            <td>{{ object.created_at }}</td>
+        </tr>
+
+        </tbody>
+        </table>
+    {% endfor %}
+</body>
+</html>

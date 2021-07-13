@@ -9,6 +9,9 @@
 {% block content %}
     <div class="container-login100" style="background-color: #7abaff" >
         <div class="container">
+{#        <a href="{% url 'phones:print-list' pk=name %}" class="btn btn-primary mt-2">#}
+{#            🖨#}
+{#        </a>#}
             {#            {% cache 3600 1 %}#}
             <h2 style="color: white" class="mb-4 mt-5">{% trans 'فهرست مخاطب ها' %}</h2>
             <table class="table table-striped" style="background-color: white">
@@ -42,7 +45,7 @@
                             </form>
                         </td>
                         <td>{{ contact.created_at }}</td>
-                        <td><a href="" class="btn btn-primary mt-2">
+                        <td><a href="{% url 'phones:print-list' pk=contact.pk %}" class="btn btn-primary mt-2">
                             🖨
                         </a></td>
                     </tr>
