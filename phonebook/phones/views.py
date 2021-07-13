@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View, generic
@@ -145,19 +146,14 @@ class SessionView(View):
         return render(request, self.template_name, context=context)
 
 
-class PrintList(LoginRequiredMixin, DetailView):
+class PrintList(LoginRequiredMixin, ListView):
     model = models.Entry
     template_name = 'phones/entry_detail.html'
 
     def get(self, request, *args, **kwargs):
-        # Call parents as normal
         g = super(PrintList, self).get(request, *args, **kwargs)
-
-        # Get the rendered content and pass it to weasyprint
         rendered_content = g.rendered_content
         pdf = weasyprint.HTML(string=rendered_content).write_pdf()
-
-        # Create a new http response with pdf mime type
         response = HttpResponse(pdf, content_type='application/pdf')
         return response
 

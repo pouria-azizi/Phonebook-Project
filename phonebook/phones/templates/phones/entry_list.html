@@ -9,11 +9,13 @@
 {% block content %}
     <div class="container-login100" style="background-color: #7abaff" >
         <div class="container">
-{#        <a href="{% url 'phones:print-list' pk=name %}" class="btn btn-primary mt-2">#}
-{#            🖨#}
-{#        </a>#}
-            {#            {% cache 3600 1 %}#}
+        <div class="d-flex justify-content-between align-items-center">
+        <a href="{% url 'phones:print-list' %}" class="btn btn-primary mt-2">
+           {% trans 'چاپ' %} <i class="fa fa-print ml-2"></i>
+        </a>
+{#                        {% cache 3600 1 %}#}
             <h2 style="color: white" class="mb-4 mt-5">{% trans 'فهرست مخاطب ها' %}</h2>
+        </div>
             <table class="table table-striped" style="background-color: white">
                 <thead>
                 <tr>
@@ -21,7 +23,7 @@
                     <th>{% trans 'نام خانوادگی' %}</th>
                     <th>{% trans 'شماره' %}</th>
                     <th>{% trans 'تاریخ ایجاد' %}</th>
-                    <th>{% trans 'چاپ' %}</th>
+{#                    <th>{% trans 'چاپ' %}</th>#}
                 </tr>
                 </thead>
                 {% for contact in object_list %}
@@ -39,15 +41,12 @@
                                                value="{{ contact.phone_number }}">
                                         <a class="btn btn-primary ml-5"
                                            href="{% url 'phones:edit-contacts' pk=contact.pk %}">Edit</a>
-                                        <button class="submit btn btn-danger">Delete</button>
+                                        <a href="{% url 'phones:delete-from-phonebook' pk=contact.pk %}" class="btn btn-danger">Delete</a>
                                     </label>
                                 </div>
                             </form>
                         </td>
                         <td>{{ contact.created_at }}</td>
-                        <td><a href="{% url 'phones:print-list' pk=contact.pk %}" class="btn btn-primary mt-2">
-                            🖨
-                        </a></td>
                     </tr>
 
                     </tbody>

@@ -9,7 +9,8 @@ urlpatterns = [
     path('', views.ShowAddEntryForm.as_view(), name='show-add-entry-form'),
     path("contacts/", views.ContactList.as_view(), name="contacts"),
     # path("edit-contacts/", views.EditContact.as_view(), name="edit-contacts"),
+    path('delete/<int:pk>', views.DeleteRow.as_view(), name='delete-from-phonebook'),
     path('update/<int:pk>', views.EditContact.as_view(), name="edit-contacts"),
     path('activities/', views.SessionView.as_view(), name="recent-activities"),
-    path('print/<int:pk>', views.PrintList.as_view(), name='print-list'),
+    path('print/', views.PrintList.as_view(), name='print-list'),
 ]

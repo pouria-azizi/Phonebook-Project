@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>phone numbers</title>
+
 </head>
 <body>
 <table class="table table-striped">
@@ -15,18 +16,19 @@
         <th>{% trans 'تاریخ ایجاد' %}</th>
     </tr>
     </thead>
-    {% for contact in object %}
+    {% for contact in object_list %}
         <tbody>
 
         <tr>
-            <td>{{ object.name }}</td>
-            <td>{{ object.last_name }}</td>
-            <td>{{ object.phone_number }}</td>
-            <td>{{ object.created_at }}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.last_name }}</td>
+            <td>{{ contact.phone_number }}</td>
+            <td>{{ contact.created_at }}</td>
         </tr>
 
         </tbody>
-        </table>
     {% endfor %}
+
+</table>
 </body>
 </html>
