@@ -1,5 +1,5 @@
 {% extends 'phones/base.html' %}
-
+{% load i18n %}
 {% block page_header_title %}
     Search
 {% endblock %}
@@ -10,18 +10,18 @@
             <div class="col-md-3">
 
                 <div class="panel-heading">
-                    <div class="panel-title" style="color: white">Search in Phonebook</div>
+                    <div class="panel-title" style="color: white">{% trans 'جستجو در دفترچه تلفن' %}<i class="fa fa-search ml-1 mr-1"></i></div>
                 </div>
                 <div style="padding-top:30px" class="panel-body">
 
                     <form>
-                        <label for="query" style="color: white" class="mb-3">Enter phone number:</label>
+                        <label for="query" style="color: white" class="mb-3">{% trans 'شماره تلفن را وارد نمایید' %}</label>
                         <input type="text" id="query">
 
                     </form>
                     <div class="input-group mt-3">
                         <div class="input-group-prepend">
-                            <button id="search-btn" style="color: white" class="mt-2 mb-5">Search 🔎</button>
+                            <button id="search-btn" style="color: white" class="mt-2 mb-5">{% trans 'Search' %} 🔎</button>
                             <div id="output-div"></div>
                         </div>
                         <select class="custom-select" id="SearchType2">

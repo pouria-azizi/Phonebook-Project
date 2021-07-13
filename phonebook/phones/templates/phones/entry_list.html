@@ -1,7 +1,7 @@
 {% extends 'phones/base.html' %}
 {#{% load cache %}#}
 {% load i18n %}
-{#{% get_current_language_bidi as LANGUAGE_BIDI %}#}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {#{{ LANGUAGE_CODE|language_bidi }}#}
 {% block page_header_title %}
     contact list
@@ -10,7 +10,7 @@
     <div class="container-login100" style="background-color: #7abaff" >
         <div class="container">
             {#            {% cache 3600 1 %}#}
-            <h2 style="color: white" class="mb-5" lang="fa">{% trans 'فهرست مخاطب ها' %}</h2>
+            <h2 style="color: white" class="mb-4 mt-5">{% trans 'فهرست مخاطب ها' %}</h2>
             <table class="table table-striped" style="background-color: white">
                 <thead>
                 <tr>

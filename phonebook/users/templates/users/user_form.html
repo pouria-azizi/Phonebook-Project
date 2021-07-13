@@ -1,4 +1,5 @@
 {% extends 'phones/base.html' %}
+{% load i18n %}
 {% block page_header_title %}
     Edit Profile
 {% endblock %}
@@ -9,23 +10,23 @@
             <div class="row mb-2">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                <h3 style="color: dodgerblue" class="text mb-4">👤 Edit Profile</h3>
+                <h3 style="color: dodgerblue" class="text mb-4">👤 {% trans 'ویرایش مشخصات' %}</h3>
                     <div class="form-group">
-                        <label for="first_name" style="color: white" >First name:</label>
+                        <label for="first_name" style="color: white" >{% trans 'نام' %}</label>
                         <input type="text" id="first_name" class="form-control" value="{{ form.initial.first_name }}" name="first_name">
                         {{ field.errors }}
                     </div>
                     <div class="form-group">
-                        <label for="last_name" style="color: white">Last name:</label>
+                        <label for="last_name" style="color: white">{% trans 'نام خانوادگی' %}</label>
                         <input type="text" id="last_name" class="form-control" value="{{ form.initial.last_name }}" name="last_name">
                         {{ field.errors }}
                     </div>
                     <div class="form-group">
-                        <label for="email" style="color: white" >Email address:</label>
+                        <label for="email" style="color: white" >{% trans 'ایمیل' %}</label>
                         <input type="email" id="email" class="form-control" value="{{ form.initial.email }}" name="email">
                         {{ field.errors }}
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">{% trans 'ذخیره' %}</button>
                 </form>
             </div>
         </div>

@@ -50,7 +50,7 @@ msgid "چاپ"
 msgstr "Print"
 
 #: phones/templates/phones/base.html:20
-msgid "مخاطب ها"
+msgid "مخاطبین"
 msgstr "Contacts"
 
 #: phones/templates/phones/base.html:21
@@ -60,3 +60,51 @@ msgstr "Activities"
 #: phones/templates/phones/base.html:22
 msgid "فهرست مخاطب ها"
 msgstr "Contacts list"
+
+#: phones/templates/phones/base.html:22
+msgid "مخاطب جدید"
+msgstr "New Contact"
+
+#: phones/templates/phones/base.html:22
+msgid "دفترچه تلفن"
+msgstr "Phonebook"
+
+#: phones/templates/phones/base.html:22
+msgid "خروج"
+msgstr "Logout"
+
+#: phones/templates/phones/base.html:22
+msgid "ورود"
+msgstr "Login"
+
+#: phones/templates/phones/base.html:22
+msgid "ایجاد مخاطب"
+msgstr "Create Contact"
+
+#: phones/templates/phones/base.html:22
+msgid "شماره تلفن را وارد نمایید"
+msgstr "Enter phone number"
+
+#: phones/templates/phones/base.html:22
+msgid "جستجو در دفترچه تلفن"
+msgstr "Search in Phonebook"
+
+#: phones/templates/phones/base.html:22
+msgid "لطفا وارد شوید"
+msgstr "Please login"
+
+#: phones/templates/phones/base.html:22
+msgid "ایمیل"
+msgstr "Email"
+
+#: phones/templates/phones/base.html:22
+msgid "ویرایش مشخصات"
+msgstr "Edit Profile"
+
+#: phones/templates/phones/base.html:22
+msgid "ذخیره"
+msgstr "Save"
+
+#: phones/templates/phones/base.html:22
+msgid "ارسال"
+msgstr "Send"

@@ -4,9 +4,11 @@
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 <html {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-    <title>دفترچه تلفن</title>
+    <title>{% trans 'دفترچه تلفن' %}</title>
     <script src="{% static 'js/jquery-3.6.0.js' %}"></script>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/all.css' %}" rel="stylesheet">
 
 </head>
 <body>
@@ -14,20 +16,20 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
     {% if user.is_authenticated %}
 
-        <a class="navbar-brand" href={% url 'phones:show-add-entry-form' %}>Create Contact</a>
+        <a class="navbar-brand" href={% url 'phones:show-add-entry-form' %}>{% trans 'ایجاد مخاطب' %}</a>
 
         <a class="navbar-brand" href={% url 'phones:search' %}>{% trans 'Search' %}</a>
 
-        <a class="navbar-brand" href={% url 'phones:contacts' %}>{% trans 'Contacts' %}</a>
+        <a class="navbar-brand" href={% url 'phones:contacts' %}>{% trans 'مخاطبین' %}</a>
 
-        <a class="navbar-brand" href="{% url 'phones:recent-activities' %}">Activities</a>
+        <a class="navbar-brand" href="{% url 'phones:recent-activities' %}">{% trans 'فعالیت ها' %}</a>
     {% endif %}
     <ul class="navbar-nav ml-auto">
         {% if not user.is_authenticated %}
-            <a class="navbar-brand" href={% url 'users:login' %}>Login</a>
+            <a class="navbar-brand" href={% url 'users:login' %}>{% trans 'ورود' %}</a>
         {% endif %}
         {% if user.is_authenticated %}
-            <a class="navbar-brand" style="color: #c80000" href="{% url 'users:logout' %}">Logout</a>
+            <a class="navbar-brand" style="color: #c80000" href="{% url 'users:logout' %}">{% trans 'خروج' %}</a>
         {% endif %}
         {% if user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'users:edit-profile' %}">{{ user.username }}</a>
@@ -36,7 +38,7 @@
 </nav>
 
 <div class="container" style="background-color: #7abaff">
-    <h1 class="mt-5 mb-4">New Contact:</h1>
+    <h1 class="mt-5 mb-4"><i class="fa fa-phone-volume ml-2"></i>{% trans 'مخاطب جدید' %}</h1>
     <form>
         <div class="form-group">
             <label for="title" style="color: white">{% trans 'نام' %}</label>
@@ -52,7 +54,7 @@
         </div>
         {#    {{ form.as_table}}#}
     </form>
-    <button id="send-form" class="btn btn-primary mb-5">Send</button>
+    <button id="send-form" class="btn btn-primary mb-5">{% trans 'ارسال' %}</button>
 </div>
 </body>
 <script>
