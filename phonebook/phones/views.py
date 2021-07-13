@@ -1,13 +1,14 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View, generic
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DetailView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, DeleteView
 from . import forms, models
 from .models import Entry
 import weasyprint
@@ -118,6 +119,11 @@ class EditContact(LoginRequiredMixin, UpdateView):
         'last_name',
         'phone_number',)
     template_name = 'phones/Entry_update_form.html'
+    success_url = reverse_lazy('phones:contacts')
+
+
+class DeleteRow(DeleteView):
+    model = models.Entry
     success_url = reverse_lazy('phones:contacts')
 
 
