@@ -1,18 +1,19 @@
-from django.contrib import messages
+import logging
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.template.loader import render_to_string
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View, generic
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DetailView
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView
 from django.views.generic.edit import FormView, DeleteView
 from . import forms, models
 from .models import Entry
 import weasyprint
+
+logger = logging.getLogger(__name__)  # logger object
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -28,7 +29,7 @@ class CreateEntry(LoginRequiredMixin, CreateView):
             request.session['create entry'] = 'create entry'
             request.session.modified = True
             # print(dict(request.session))
-
+            logger.info(f'New contact is created by {self.request.user}')
             return JsonResponse(data={
                 'success': True,
                 'pk': entry_object.pk,
@@ -39,6 +40,7 @@ class CreateEntry(LoginRequiredMixin, CreateView):
         else:
             request.session['error create entry'] = 'error create entry'
             request.session.modified = True
+            logger.info(f'Failed create new contact by {self.request.user}')
             return JsonResponse(data={
                 'success': False,
             }, status=400)
@@ -72,6 +74,7 @@ class FindEntry(generic.View):
         value = self.request.GET.get('value', None)
         request.session['search'] = 'search'
         request.session.modified = True
+        logger.info(f'Searching on phonebook by {self.request.user}')
         if not phone_number:
             return JsonResponse({'success': False, 'error': 'No number specified.'}, status=400)
 
@@ -109,6 +112,7 @@ class ContactList(ListView):
     def get_queryset(self):
         self.request.session['show list'] = 'show list'
         self.request.session.modified = True
+        logger.info(f'View contact list')
         return Entry.objects.filter(user=self.request.user)
 
 
@@ -159,4 +163,5 @@ class PrintList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
+        logger.info(f'Downloaded the list of contact as a pdf file by {self.request.user}')
         return qs.filter(user=self.request.user)

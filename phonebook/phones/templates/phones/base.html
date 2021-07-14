@@ -37,7 +37,7 @@
     {% endif %}
     <ul class="navbar-nav ml-auto">
         {% if not user.is_authenticated %}
-            <a class="navbar-brand" href={% url 'users:login' %}>{% trans 'ورود' %}</a>
+            <a class="navbar-brand" href={% url 'users:login' %}> {% trans 'ورود' %}<i class="fa fa-sign-in-alt ml-1 mr-1"></i></a>
         {% endif %}
         {% if user.is_authenticated %}
             <a class="navbar-brand" style="color: #c80000" href="{% url 'users:logout' %}">{% trans 'خروج' %}</a>

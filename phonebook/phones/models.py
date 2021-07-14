@@ -1,9 +1,12 @@
+import logging
 from django.core.validators import RegexValidator
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 phone_regex = RegexValidator(regex='^0[0-9]{2,}[0-9]{7,}$', message='phone number invalid')
+
+logger = logging.getLogger(__name__)  # logger object
 
 
 class Entry(models.Model):

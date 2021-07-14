@@ -1,15 +1,15 @@
+import logging
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import UpdateView, ListView
-
+from django.views.generic import UpdateView
 from . import forms, models
+logger = logging.getLogger(__name__)  # logger object
 
 
 @csrf_exempt
@@ -27,6 +27,7 @@ def login_view(request):
             password = form_instance.cleaned_data['password']
 
             user = authenticate(request, username=username, password=password)
+            logger.info(f'{user} is login')
             if user is not None:
                 # The user was found and authenticated
                 login(request, user)
@@ -54,6 +55,7 @@ def logout_view(request):
     Logs out the user
     """
     logout(request)
+    logger.info(f'user is logout')
     return redirect('users:login')
 
 
@@ -72,5 +74,5 @@ class EditUserProfile(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('phones:show-add-entry-form')
 
     def get_object(self, queryset=None):
+        logger.info(f'updated profile by {self.request.user}')
         return self.request.user
-
