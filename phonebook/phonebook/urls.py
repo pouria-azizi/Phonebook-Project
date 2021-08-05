@@ -16,11 +16,20 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from phones import views as phones_views
+from users import views as users_views
+
+router = DefaultRouter()
+router.register('phones', phones_views.UpdateContactViewSet)
+router.register('users', users_views.UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('phones/', include('phones.urls')),
-    path('users/', include('users.urls'))
+    path('users/', include('users.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/', include(router.urls))
 ]
 
 if settings.DEBUG:

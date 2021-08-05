@@ -1,8 +1,6 @@
 {% extends 'phones/base.html' %}
 {#{% load cache %}#}
 {% load i18n %}
-{% get_current_language_bidi as LANGUAGE_BIDI %}
-{#{{ LANGUAGE_CODE|language_bidi }}#}
 {% block page_header_title %}
     contact list
 {% endblock %}
@@ -11,7 +9,7 @@
         <div class="container">
         <div class="d-flex justify-content-between align-items-center">
         <a href="{% url 'phones:print-list' %}" class="btn btn-dark btn-outline-light mt-2">
-           pdf <i class="fa fa-file-pdf ml-1 mr-1"></i>
+           PDF <i class="fa fa-file-pdf ml-1 mr-1"></i>
         </a>
 {#                        {% cache 3600 1 %}#}
             <h2 style="color: white" class="mb-4 mt-5">{% trans 'فهرست مخاطب ها' %}</h2>
@@ -23,7 +21,6 @@
                     <th>{% trans 'نام خانوادگی' %}</th>
                     <th>{% trans 'شماره' %}</th>
                     <th>{% trans 'تاریخ ایجاد' %}</th>
-{#                    <th>{% trans 'چاپ' %}</th>#}
                 </tr>
                 </thead>
                 {% for contact in object_list %}
@@ -42,6 +39,7 @@
                                         <a class="btn btn-primary ml-5"
                                            href="{% url 'phones:edit-contacts' pk=contact.pk %}">Edit</a>
                                         <a href="{% url 'phones:delete-from-phonebook' pk=contact.pk %}" class="btn btn-danger">Delete</a>
+{#                                        <a href="{% url 'phones:api' pk=contact.pk %}" class="btn btn-success">API</a>#}
                                     </label>
                                 </div>
                             </form>

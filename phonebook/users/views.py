@@ -8,7 +8,10 @@ from django.urls import reverse_lazy
 from django.utils.http import is_safe_url
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import UpdateView
-from . import forms, models
+from rest_framework import viewsets, permissions
+from django.contrib.auth import models as modelss
+from . import forms, models, serializers
+
 logger = logging.getLogger(__name__)  # logger object
 
 
@@ -76,3 +79,18 @@ class EditUserProfile(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         logger.info(f'updated profile by {self.request.user}')
         return self.request.user
+
+
+
+"""
+DRF View
+"""
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing user instances.
+    """
+    serializer_class = serializers.UserSerializer
+    queryset = modelss.User.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]

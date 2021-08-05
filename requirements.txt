@@ -3,3 +3,5 @@ psycopg2-binary
 django-debug-toolbar~=3.2.1
 pymemcache
 WeasyPrint~=52.5
+django-jalali
+djangorestframework~=3.12.4
